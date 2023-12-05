@@ -6,5 +6,6 @@ numpy
 python-multipart
 spacy
 transformers
-tensorflow
-torch
+openai
+langchain
+tiktoken

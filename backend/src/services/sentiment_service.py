@@ -51,11 +51,16 @@ def complete_analysis_from_text(text: str, sentiment_analyzer: GeneralAnalyzer, 
 
     inference_time_formatted = ms_to_hhmmssms(inference_time * 1000)
 
+    models = []
+
+    if sentiment_analyzer.model_name not in models:
+        models.append(sentiment_analyzer.model_name)
+
+    if analyzer_predictor.model_name not in models:
+        models.append(analyzer_predictor.model_name)
+
     complete_analize = CompleteAnalize(
-        models=[
-            sentiment_analyzer.model_name,
-            analyzer_predictor.model_name
-        ],
+        models=models,
         inference_time_s=inference_time,
         inference_time_formatted=inference_time_formatted,
         text_analyzed=text,

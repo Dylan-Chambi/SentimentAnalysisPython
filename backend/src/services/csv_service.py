@@ -51,12 +51,12 @@ class CSVService():
 
     def write_csv(self, data: CSVItem):
         with open(self.csv_path, "a", newline="") as f:
-            writer = csv.writer(f)
+            writer = csv.writer(f, delimiter="|")
             writer.writerow(data.to_list())
 
     def read_csv(self) -> list:
         with open(self.csv_path, "r") as f:
-            reader = csv.reader(f)
+            reader = csv.reader(f, delimiter="|")
             data = list(reader)
         return data
     

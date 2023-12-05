@@ -1,9 +1,7 @@
-import torch
-from transformers import pipeline, AutoModel, AutoTokenizer, AutoConfig, AutoModelForSequenceClassification
+from transformers import AutoTokenizer, AutoConfig, AutoModelForSequenceClassification
 from src.utils.functions import sentiment_selector
 from src.predictors.general_analyzer import GeneralAnalyzer
 from src.config.config import get_settings
-import torch.nn.functional as F
 
 SETTINGS = get_settings()
 
@@ -14,12 +12,11 @@ class SentimentAnalyzer(GeneralAnalyzer):
         self.tokenizer = AutoTokenizer.from_pretrained(SETTINGS.sentiment_model)
         super().__init__(model_name=SETTINGS.sentiment_model)
 
-    def predict(self, text) -> tuple:
+    def predict(self, text) -> list:
         tokens = self.tokenizer(text, return_tensors="pt", padding=True)
-        with torch.no_grad():
-            logits = self.model(**tokens).logits
+        logits = self.model(**tokens).logits
 
-        probabilidades = F.softmax(logits, dim=1).tolist()[0]
+        probabilidades = logits.softmax(dim=1).tolist()[0]
 
         return [
             {"label": key, "score": probabilidades[value]}
