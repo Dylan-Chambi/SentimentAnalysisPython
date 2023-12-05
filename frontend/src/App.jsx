@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 
-const url = import.meta.env.VITE_BACKEND_URL;
+const url = "https://sentimentanalysispython-547kwfnkdq-ue.a.run.app";
 
 function App() {
   const [text, setText] = useState('');
