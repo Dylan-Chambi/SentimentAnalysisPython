@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from src.controllers.sentiment_controller import sentiment_analysis, complete_analysis
 from src.controllers.reports_controller import get_reports
+from src.controllers.status_controller import get_service_status
+from src.schemas.status import Status
 from src.predictors.general_analyzer import GeneralAnalyzer
 from src.predictors.general_predictor import GeneralPredictor
 from src.predictors.sentiment_analyzer import SentimentAnalyzer
@@ -28,13 +30,17 @@ def get_csv_service():
 
 router = APIRouter()
 
+@router.get("/status")
+def status() -> Status:
+    return get_service_status()
+
 @router.post("/sentiment")
-def predict(sentiment_request: SentimentRequest = Depends(), sentiment_analyzer: GeneralAnalyzer = Depends(get_sentiment_analyzer), csv_service: CSVService = Depends(get_csv_service)) -> Sentiment:
+def sentiment(sentiment_request: SentimentRequest = Depends(), sentiment_analyzer: GeneralAnalyzer = Depends(get_sentiment_analyzer), csv_service: CSVService = Depends(get_csv_service)) -> Sentiment:
     return sentiment_analysis(sentiment_request, sentiment_analyzer, csv_service)
 
 
 @router.post("/analysis")
-def predict(analyze_request: AnalyzeRequest = Depends(), sentiment_analyzer: GeneralAnalyzer = Depends(get_sentiment_analyzer), analyzer_predictor: GeneralPredictor = Depends(get_analyzer_predictor), csv_service: CSVService = Depends(get_csv_service)) -> CompleteAnalize:
+def analysis(analyze_request: AnalyzeRequest = Depends(), sentiment_analyzer: GeneralAnalyzer = Depends(get_sentiment_analyzer), analyzer_predictor: GeneralPredictor = Depends(get_analyzer_predictor), csv_service: CSVService = Depends(get_csv_service)) -> CompleteAnalize:
     return complete_analysis(analyze_request, sentiment_analyzer, analyzer_predictor, csv_service)
 
 @router.get("/reports", response_class=StreamingResponse)
