@@ -21,7 +21,7 @@ def analyze_sentiment_from_text(text: str, sentiment_analyzer: GeneralAnalyzer) 
         inference_time_s=inference_time,
         inference_time_formatted=inference_time_formatted,
         text_analyzed=text,
-        model=""
+        model=sentiment_analyzer.model_name
     )
 
 def complete_analysis_from_text(text: str, sentiment_analyzer: GeneralAnalyzer, analyzer_predictor: GeneralPredictor) -> CompleteAnalize:
@@ -34,7 +34,10 @@ def complete_analysis_from_text(text: str, sentiment_analyzer: GeneralAnalyzer, 
     inference_time_formatted = ms_to_hhmmssms(inference_time * 1000)
 
     return CompleteAnalize(
-        models=[""],
+        models=[
+            sentiment_analyzer.model_name,
+            analyzer_predictor.model_name
+        ],
         inference_time_s=inference_time,
         inference_time_formatted=inference_time_formatted,
         text_analyzed=text,

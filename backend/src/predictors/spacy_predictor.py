@@ -1,10 +1,13 @@
 import spacy
 import numpy as np
 from src.predictors.general_predictor import GeneralPredictor
+from src.config.config import get_settings
+
+SETTINGS = get_settings()
 
 class SpacyPredictor(GeneralPredictor):
     def __init__(self):
-        super().__init__(spacy.load("es_core_news_md"))
+        super().__init__(model_name=SETTINGS.spacy_model, model=spacy.load(SETTINGS.spacy_model))
 
     def analyze_text(self, text: str) -> tuple:
         doc = self.model(text)

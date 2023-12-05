@@ -1,10 +1,13 @@
 from transformers import pipeline
 from src.utils.functions import sentiment_selector
 from src.predictors.general_analyzer import GeneralAnalyzer
+from src.config.config import get_settings
+
+SETTINGS = get_settings()
 
 class SentimentAnalyzer(GeneralAnalyzer):
     def __init__(self):
-        self.model = pipeline(model="lxyuan/distilbert-base-multilingual-cased-sentiments-student", top_k=None)
+        super().__init__(model_name=SETTINGS.sentiment_model, model=pipeline(model=SETTINGS.sentiment_model, top_k=None))
 
     def analyze_sentiment(self, text) -> tuple:
 
