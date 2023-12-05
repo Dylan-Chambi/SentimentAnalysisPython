@@ -64,12 +64,12 @@ function App() {
               <p><b>Text analyzed:</b> {data.text_analyzed}</p>
               <p><b>Sentiment score:</b> {data.sentiment?.score.toFixed(2)}</p>
               <p><b>Sentiment category:</b> {data.sentiment?.category}</p>
-              <p><b>Inference time:</b> {data.inference_time_s.toFixed(2)}s</p>
+              <p><b>Inference time:</b> {data.inference_time_s?.toFixed(2)}s</p>
               <p><b>Inference time formatted:</b> {data.inference_time_formatted}</p>
 
               <h4 className="parts-of-speech">Parts of speech tagging</h4>
               <p>[
-                {data.pos_tagging.map((item, index) => (
+                {data.pos_tagging?.map((item, index) => (
                   <span key={index}>
                     {item[0]} - {item[1]}
                     {index !== data.pos_tagging.length - 1 && ', '}
@@ -79,7 +79,7 @@ function App() {
 
               <h4 className="named-entity">Named entity recognition</h4>
               <p>[
-                {data.ner.map((item, index) => (
+                {data.ner?.map((item, index) => (
                   <span key={index}>
                     {item[0]} - {item[1]}
                     {index !== data.ner.length - 1 && ', '}
@@ -91,7 +91,7 @@ function App() {
           <div className="result-arrays" style={{ textAlign: 'left', width: '50%' }}>
               <h4 className="embeddings">Embeddings</h4>
               <p>[
-                {data.embeddings.map((item, index) => (
+                {data.embeddings?.map((item, index) => (
                   <span key={index}>
                     {item.toFixed(2)}
                     {index !== data.embeddings.length - 1 && ', '}
