@@ -3,9 +3,8 @@ from src.schemas.sentiment import Sentiment
 
 
 class GeneralAnalyzer(ABC):
-    def __init__(self, model_name: str, model):
+    def __init__(self, model_name: str):
         self.model_name = model_name
-        self.model = model
 
     def analyze_sentiment(self, text) -> Sentiment:
         pass

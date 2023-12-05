@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic-settings
+python-dotenv
+numpy
+python-multipart
+spacy
+transformers
+tensorflow
+torch

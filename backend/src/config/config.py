@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     api_name: str = "NLP sentiment analysis API"
     revision: str = "local"
     spacy_model: str = "es_core_news_md"
-    sentiment_model: str = "lxyuan/distilbert-base-multilingual-cased-sentiments-student"
+    sentiment_model: str = "backend\src\models\multilingual-sentiment"
     log_level: str = "DEBUG"
     csv_path: str = "backend/src/data/data.csv"
 
