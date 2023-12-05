@@ -5,7 +5,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8080:8080"
     env_file:
       - ./backend/.env
     mem_limit: 2GB
@@ -14,6 +14,10 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        VITE_BACKEND_URL: backend:8080
     ports:
-      - "3000:3000"
-    mem_limit: 2GB
+      - "80:80"
+    mem_limit: 256MB
+    env_file:
+      - ./frontend/.env
