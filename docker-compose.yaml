@@ -9,3 +9,11 @@ services:
     env_file:
       - ./backend/.env
     mem_limit: 2GB
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    mem_limit: 2GB
