@@ -2,9 +2,9 @@ from abc import ABC
 from src.schemas.sentiment import Sentiment
 
 
-class GeneralPredictor(ABC):
+class GeneralAnalyzer(ABC):
     def __init__(self, model):
         self.model = model
 
-    def analyze_text(text: str):
+    def analyze_sentiment(self, text) -> Sentiment:
         pass
